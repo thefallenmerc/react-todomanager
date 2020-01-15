@@ -10,9 +10,22 @@ export default class TaskList extends React.Component {
       <ul className="task-list">
         {tasks.map(task => {
           return (
-            <li className="task-item" key={task.key}>
+            <li
+              className="task-item"
+              key={task.key}
+              onClick={() => {
+                this.props.selectTask(task);
+              }}
+            >
               {task.name}
-              <span className="delete-item" onClick={() => { this.props.deleteTask(task) }}>&times;</span>
+              <span
+                className="delete-item"
+                onClick={event => {
+                  this.props.deleteTask(event, task);
+                }}
+              >
+                &times;
+              </span>
             </li>
           );
         })}

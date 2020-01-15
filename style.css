@@ -15,3 +15,7 @@ h1, p {
 .task-item:hover .delete-item {
   display: inline-block;
 }
+
+.task-input {
+  padding: 8px 10px;
+}
