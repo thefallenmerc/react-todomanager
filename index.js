@@ -3,6 +3,8 @@ import { render } from 'react-dom';
 import Hello from './Hello';
 import './style.css';
 
+import TaskList from './components/TaskList';
+
 class App extends Component {
   constructor() {
     super();
@@ -16,7 +18,7 @@ class App extends Component {
       <div>
         <Hello name={this.state.name} />
         <p>
-          Start editing to see some magic happen :)
+          <TaskList />
         </p>
       </div>
     );
