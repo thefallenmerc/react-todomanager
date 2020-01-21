@@ -13,12 +13,15 @@ class App extends Component {
       name: "Deadpool",
       lastIndex: -1,
       selectedIndex: null,
+      selectedTask: null,
       tasks: []
     };
 
     this.addTask = this.addTask.bind(this);
     this.selectTask = this.selectTask.bind(this);
     this.deleteTask = this.deleteTask.bind(this);
+    this.updateTask = this.updateTask.bind(this);
+    this.updateDescription = this.updateDescription.bind(this);
   }
 
   addTask(event) {
@@ -28,21 +31,29 @@ class App extends Component {
       }
       const { tasks } = this.state;
       const lastIndex = this.state.lastIndex + 1;
-      tasks.push({
-        name: event.target.value,
-        key: lastIndex
-      });
+      const task = this.makeTask(event.target.value);
+      tasks.push(task);
       this.setState({
         tasks,
-        lastIndex
+        lastIndex: task.key
       });
       event.target.value = "";
     }
   }
 
+  makeTask(name = "New Todo Task", isComplete = false, description = "") {
+    return {
+      name,
+      description,
+      isComplete,
+      key: this.state.lastIndex + 1
+    };
+  }
+
   selectTask(task) {
     this.setState({
-      selectedIndex: task.key
+      selectedIndex: task.key,
+      selectedTask: task
     });
   }
 
@@ -55,23 +66,45 @@ class App extends Component {
     const { tasks } = this.state;
     tasks.splice(tasks.findIndex(t => t.key === task.key), 1);
     this.setState({
-      tasks
+      tasks,
+      selectedIndex: undefined,
+      selectedTask: undefined
     });
+  }
+
+  updateTask(task) {
+    const { tasks } = this.state;
+    tasks.splice(tasks.findIndex(t => t.key === task.key), 1, task);
+    this.setState({
+      tasks,
+      selectedTask: task
+    });
+  }
+
+  updateDescription(event) {
+    const task = this.selectedTask;
+    task.description = event.target.value;
+    this.updateTask(task);
   }
 
   render() {
     return (
       <div>
-        <h4>{this.state.name}</h4>
-        <InputField addTask={this.addTask} />
-        <p>
+        <nav className="navbar">
+          <div className="username">{this.state.name}</div>
+          <InputField addTask={this.addTask} />
+        </nav>
+        <div className="main-content">
           <TaskList
             {...this.state}
             deleteTask={this.deleteTask}
             selectTask={this.selectTask}
           />
-        </p>
-        <TaskDescription task={this.selectedTask} />
+          <TaskDescription
+            updateTask={this.updateTask}
+            task={this.state.selectedTask}
+          />
+        </div>
       </div>
     );
   }

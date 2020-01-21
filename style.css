@@ -1,7 +1,61 @@
+/* Main Styles */
+html {
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+html, body {
+  padding: 0;
+  margin: 0;
+}
 h1, p {
   font-family: Lato;
 }
 
+/* Navbar */
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.5rem;
+}
+
+.navbar {
+  background-color: white;
+  box-shadow: 0 0 5px 1px darkgray;
+}
+
+.main-content {
+  margin-top: 47px;
+  padding-top: 1rem;
+  display: flex;
+}
+
+.task-list, .task-description-container {
+  width: 50%;
+}
+
+.navbar .task-input {
+    flex-grow: 1;
+    margin-left: 1rem;
+}
+
+.navbar .task-input {
+    padding: 4px 10px;
+    font-size: 1.1rem;
+    border-radius: 0.5rem;
+    border: 1px solid lightgray;
+}
+
+.navbar .task-input:hover, .navbar .task-input:focus {
+  border: 1px solid gray;
+  outline: none;
+}
+
+
+/* Task List */
 .task-item {
   padding: 5px;
 }
@@ -16,6 +70,13 @@ h1, p {
   display: inline-block;
 }
 
-.task-input {
+/* Task Input */
+.task-input 
+{
   padding: 8px 10px;
+}
+
+/* Task Description */
+.task-description-container {
+
 }
