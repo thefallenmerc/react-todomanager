@@ -23,6 +23,17 @@ export default class App extends React.Component {
         this.updateDescription = this.updateDescription.bind(this);
     }
 
+    componentDidMount() {
+      let state = JSON.parse(window.localStorage.getItem('state'));
+      if(state) {
+        this.setState(state);
+      }
+    }
+
+    componentDidUpdate(prevProps, prevState) {
+      window.localStorage.setItem('state', JSON.stringify(this.state));
+    }
+
     addTask(event) {
         if (event.key === "Enter") {
             if (event.target.value.trim() === "") {

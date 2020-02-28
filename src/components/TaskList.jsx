@@ -17,7 +17,7 @@ export default class TaskList extends React.Component {
                 this.props.selectTask(task);
               }}
             >
-              {task.name}
+              {task.name.length > 27 ? task.name.substr(0, 24) + '...' : task.name}
               <span
                 className="delete-item"
                 onClick={event => {
